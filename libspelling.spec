@@ -25,6 +25,7 @@ BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 2.029
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	vala >= 2:0.44
+BuildRequires:	vala-gtksourceview5 >= 5.6
 BuildRequires:	xz
 Requires:	gtk4 >= 4.8
 Requires:	gtksourceview5 >= 5.6
