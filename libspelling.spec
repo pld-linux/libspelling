@@ -1,34 +1,36 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# API documentation
+%bcond_without	sysprof		# sysprof profiling
 #
 Summary:	Spellchecking library for GTK 4
 Summary(pl.UTF-8):	Biblioteka sprawdzania pisowni dla GTK 4
 Name:		libspelling
-Version:	0.2.1
+Version:	0.4.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	https://download.gnome.org/sources/libspelling/0.2/%{name}-%{version}.tar.xz
-# Source0-md5:	94cb8c37d83c432e8b8935c3952bf4a4
+Source0:	https://download.gnome.org/sources/libspelling/0.4/%{name}-%{version}.tar.xz
+# Source0-md5:	643c0b1d7104fcaaad1f0c093fc75042
 URL:		https://gitlab.gnome.org/chergert/libspelling
 BuildRequires:	enchant2-devel >= 2
 %{?with_apidocs:BuildRequires:	gi-docgen}
 BuildRequires:	glib2-devel >= 2.0
-BuildRequires:	gtk4-devel >= 4.8
-BuildRequires:	gtksourceview5-devel >= 5.6
+BuildRequires:	gtk4-devel >= 4.15.5
+BuildRequires:	gtksourceview5-devel >= 5.10.0
 BuildRequires:	libicu-devel
 BuildRequires:	meson >= 0.62.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 2.029
+%{?with_sysprof:BuildRequires:	sysprof-devel >= 3.38}
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	vala >= 2:0.44
-BuildRequires:	vala-gtksourceview5 >= 5.6
+BuildRequires:	vala-gtksourceview5 >= 5.10.0
 BuildRequires:	xz
-Requires:	gtk4 >= 4.8
-Requires:	gtksourceview5 >= 5.6
+Requires:	gtk4 >= 4.15.5
+Requires:	gtksourceview5 >= 5.10.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,8 +48,8 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libspelling
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 2.0
-Requires:	gtk4-devel >= 4.8
-Requires:	gtksourceview5-devel >= 5.6
+Requires:	gtk4-devel >= 4.15.5
+Requires:	gtksourceview5-devel >= 5.10.0
 
 %description devel
 Header files for libspelling library.
@@ -62,7 +64,7 @@ Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 # with gtk4 binding
 Requires:	vala >= 2:0.44
-Requires:	vala-gtksourceview5 >= 5.6
+Requires:	vala-gtksourceview5 >= 5.10.0
 BuildArch:	noarch
 
 %description -n vala-libspelling
@@ -88,7 +90,8 @@ Dokumentacja API biblioteki libspelling.
 
 %build
 %meson build \
-	%{!?with_apidocs:-Ddocs=false}
+	%{!?with_apidocs:-Ddocs=false} \
+	%{!?with_sysprof:-Dsysprof=false}
 
 %ninja_build -C build
 
@@ -112,7 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc NEWS README.md
 %attr(755,root,root) %{_libdir}/libspelling-1.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libspelling-1.so.1
+%attr(755,root,root) %ghost %{_libdir}/libspelling-1.so.2
 %{_libdir}/girepository-1.0/Spelling-1.typelib
 
 %files devel
