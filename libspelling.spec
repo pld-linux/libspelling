@@ -23,7 +23,7 @@ BuildRequires:	meson >= 0.62.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 2.029
+BuildRequires:	rpmbuild(macros) >= 2.042
 %{?with_sysprof:BuildRequires:	sysprof-devel >= 3.38}
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	vala >= 2:0.44
@@ -89,16 +89,16 @@ Dokumentacja API biblioteki libspelling.
 %setup -q
 
 %build
-%meson build \
+%meson \
 	%{!?with_apidocs:-Ddocs=false} \
 	%{!?with_sysprof:-Dsysprof=false}
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 %if %{with apidocs}
 install -d $RPM_BUILD_ROOT%{_gidocdir}
