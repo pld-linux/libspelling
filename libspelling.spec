@@ -7,7 +7,7 @@ Summary:	Spellchecking library for GTK 4
 Summary(pl.UTF-8):	Biblioteka sprawdzania pisowni dla GTK 4
 Name:		libspelling
 Version:	0.4.9
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/libspelling/0.4/%{name}-%{version}.tar.xz
