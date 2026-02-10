@@ -6,12 +6,12 @@
 Summary:	Spellchecking library for GTK 4
 Summary(pl.UTF-8):	Biblioteka sprawdzania pisowni dla GTK 4
 Name:		libspelling
-Version:	0.4.9
-Release:	2
+Version:	0.4.10
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/libspelling/0.4/%{name}-%{version}.tar.xz
-# Source0-md5:	867a57cfd5d1a34493c464cc9cd23766
+# Source0-md5:	7b9126de70de5de6212f3d3d73862a17
 URL:		https://gitlab.gnome.org/GNOME/libspelling
 BuildRequires:	enchant2-devel >= 2
 %{?with_apidocs:BuildRequires:	gi-docgen}
@@ -119,13 +119,13 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc NEWS README.md
-%attr(755,root,root) %{_libdir}/libspelling-1.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libspelling-1.so.2
+%{_libdir}/libspelling-1.so.*.*.*
+%ghost %{_libdir}/libspelling-1.so.2
 %{_libdir}/girepository-1.0/Spelling-1.typelib
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libspelling-1.so
+%{_libdir}/libspelling-1.so
 %{_includedir}/libspelling-1
 %{_datadir}/gir-1.0/Spelling-1.gir
 %{_pkgconfigdir}/libspelling-1.pc
